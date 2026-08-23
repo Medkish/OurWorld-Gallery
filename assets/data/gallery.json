@@ -1,0 +1,168 @@
+{
+    "pictures":  [
+                     {
+                         "title":  "7",
+                         "image":  "assets/img/gallery/7.jpg"
+                     },
+                     {
+                         "title":  "flower-bloom",
+                         "image":  "assets/img/gallery/flower-bloom.jpg"
+                     },
+                     {
+                         "title":  "gallery-10",
+                         "image":  "assets/img/gallery/gallery-10.jpeg"
+                     },
+                     {
+                         "title":  "gallery-13 (2)",
+                         "image":  "assets/img/gallery/gallery-13 (2).jpeg"
+                     },
+                     {
+                         "title":  "gallery-13",
+                         "image":  "assets/img/gallery/gallery-13.jpeg"
+                     },
+                     {
+                         "title":  "gallery-13",
+                         "image":  "assets/img/gallery/gallery-13.jpg"
+                     },
+                     {
+                         "title":  "gallery-14",
+                         "image":  "assets/img/gallery/gallery-14.jpeg"
+                     },
+                     {
+                         "title":  "gallery-16",
+                         "image":  "assets/img/gallery/gallery-16.jpeg"
+                     },
+                     {
+                         "title":  "gallery-2",
+                         "image":  "assets/img/gallery/gallery-2.jpeg"
+                     },
+                     {
+                         "title":  "gallery-8",
+                         "image":  "assets/img/gallery/gallery-8.jpg"
+                     },
+                     {
+                         "title":  "gallery-9",
+                         "image":  "assets/img/gallery/gallery-9.jpeg"
+                     },
+                     {
+                         "title":  "love-moment-1",
+                         "image":  "assets/img/gallery/love-moment-1.jpg"
+                     },
+                     {
+                         "title":  "love-moment-2",
+                         "image":  "assets/img/gallery/love-moment-2.jpg"
+                     },
+                     {
+                         "title":  "ls2",
+                         "image":  "assets/img/gallery/ls2.jpg"
+                     },
+                     {
+                         "title":  "p1",
+                         "image":  "assets/img/gallery/p1.jpg"
+                     },
+                     {
+                         "title":  "p2",
+                         "image":  "assets/img/gallery/p2.jpg"
+                     },
+                     {
+                         "title":  "p3",
+                         "image":  "assets/img/gallery/p3.jpg"
+                     },
+                     {
+                         "title":  "p4",
+                         "image":  "assets/img/gallery/p4.jpg"
+                     },
+                     {
+                         "title":  "p8",
+                         "image":  "assets/img/gallery/p8.jpg"
+                     },
+                     {
+                         "title":  "profile-img",
+                         "image":  "assets/img/gallery/profile-img.jpg"
+                     },
+                     {
+                         "title":  "testimonials-3",
+                         "image":  "assets/img/gallery/testimonials-3.jpeg"
+                     },
+                     {
+                         "title":  "watch-classic",
+                         "image":  "assets/img/gallery/watch-classic.jpg"
+                     },
+                     {
+                         "title":  "WhatsApp Image 2026-07-24 at 1.45.52 PM",
+                         "image":  "assets/img/gallery/WhatsApp Image 2026-07-24 at 1.45.52 PM.jpeg"
+                     },
+                     {
+                         "title":  "WhatsApp Image 2026-08-02 at 1.32.06 PM",
+                         "image":  "assets/img/gallery/WhatsApp Image 2026-08-02 at 1.32.06 PM.jpeg"
+                     },
+                     {
+                         "title":  "WhatsApp Image 2026-08-02 at 11.42.51 AM (1)",
+                         "image":  "assets/img/gallery/WhatsApp Image 2026-08-02 at 11.42.51 AM (1).jpeg"
+                     },
+                     {
+                         "title":  "WhatsApp Image 2026-08-02 at 11.42.51 AM",
+                         "image":  "assets/img/gallery/WhatsApp Image 2026-08-02 at 11.42.51 AM.jpeg"
+                     },
+                     {
+                         "title":  "WhatsApp Image 2026-08-03 at 10.20.24 AM",
+                         "image":  "assets/img/gallery/WhatsApp Image 2026-08-03 at 10.20.24 AM.jpeg"
+                     },
+                     {
+                         "title":  "WhatsApp Image 2026-08-05 at 9.04.04 PM",
+                         "image":  "assets/img/gallery/WhatsApp Image 2026-08-05 at 9.04.04 PM.jpeg"
+                     },
+                     {
+                         "title":  "WhatsApp Image 2026-08-06 at 5.37.27 AM",
+                         "image":  "assets/img/gallery/WhatsApp Image 2026-08-06 at 5.37.27 AM.jpeg"
+                     },
+                     {
+                         "title":  "WhatsApp Image 2026-08-07 at 12.05.43 PM",
+                         "image":  "assets/img/gallery/WhatsApp Image 2026-08-07 at 12.05.43 PM.jpeg"
+                     },
+                     {
+                         "title":  "WhatsApp Image 2026-08-08 at 6.22.34 PM",
+                         "image":  "assets/img/gallery/WhatsApp Image 2026-08-08 at 6.22.34 PM.jpeg"
+                     },
+                     {
+                         "title":  "WhatsApp Image 2026-08-08 at 9.29.20 AM",
+                         "image":  "assets/img/gallery/WhatsApp Image 2026-08-08 at 9.29.20 AM.jpeg"
+                     },
+                     {
+                         "title":  "WhatsApp Image 2026-08-08 at 9.32.01 AM",
+                         "image":  "assets/img/gallery/WhatsApp Image 2026-08-08 at 9.32.01 AM.jpeg"
+                     },
+                     {
+                         "title":  "WhatsApp Image 2026-08-11 at 4.51.44 PM",
+                         "image":  "assets/img/gallery/WhatsApp Image 2026-08-11 at 4.51.44 PM.jpeg"
+                     },
+                     {
+                         "title":  "WhatsApp Image 2026-08-11 at 8.12.52 AM",
+                         "image":  "assets/img/gallery/WhatsApp Image 2026-08-11 at 8.12.52 AM.jpeg"
+                     },
+                     {
+                         "title":  "WhatsApp Image 2026-08-12 at 7.48.22 AM",
+                         "image":  "assets/img/gallery/WhatsApp Image 2026-08-12 at 7.48.22 AM.jpeg"
+                     },
+                     {
+                         "title":  "WhatsApp Image 2026-08-15 at 9.23.14 AM",
+                         "image":  "assets/img/gallery/WhatsApp Image 2026-08-15 at 9.23.14 AM.jpeg"
+                     },
+                     {
+                         "title":  "WhatsApp Image 2026-08-19 at 2.16.40 PM",
+                         "image":  "assets/img/gallery/WhatsApp Image 2026-08-19 at 2.16.40 PM.jpeg"
+                     },
+                     {
+                         "title":  "WhatsApp Image 2026-08-20 at 1.50.03 PM",
+                         "image":  "assets/img/gallery/WhatsApp Image 2026-08-20 at 1.50.03 PM.jpeg"
+                     },
+                     {
+                         "title":  "WhatsApp Image 2026-08-21 at 6.20.18 PM",
+                         "image":  "assets/img/gallery/WhatsApp Image 2026-08-21 at 6.20.18 PM.jpeg"
+                     },
+                     {
+                         "title":  "you\u0026me",
+                         "image":  "assets/img/gallery/you\u0026me.jpeg"
+                     }
+                 ]
+}

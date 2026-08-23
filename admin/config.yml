@@ -1,0 +1,36 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "assets/img/gallery"
+public_folder: "/assets/img/gallery"
+
+site_url: "https://makbro.serveirc.com"
+logo_url: "/assets/img/logo.png"
+locale: "en"
+
+collections:
+  - name: "gallery"
+    label: "Gallery Pictures"
+    label_singular: "Picture"
+    description: "Add, edit, reorder or remove the photos shown on the Gallery page."
+    files:
+      - name: "pictures"
+        label: "Pictures"
+        file: "assets/data/gallery.json"
+        format: "json"
+        fields:
+          - label: "Pictures"
+            name: "pictures"
+            label_singular: "Picture"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - label: "Title"
+                name: "title"
+                widget: "string"
+                required: false
+              - label: "Photo"
+                name: "image"
+                widget: "image"
+                allow_multiple: false
