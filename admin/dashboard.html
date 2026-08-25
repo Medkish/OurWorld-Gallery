@@ -125,6 +125,7 @@
 <div id="toast"></div>
 
 <script>
+if(sessionStorage.getItem('lg_auth')!=='1'){location.replace('./');throw new Error('auth')}
 const REPO='Medkish/OurWorld-Gallery',BRANCH='master',JSON_PATH='assets/data/gallery.json',IMG_DIR='assets/img/gallery';
 let TOK=sessionStorage.getItem('lg_tok')||localStorage.getItem('lg_tok')||'';
 let pictures=[],jsonSha=null,dirFiles=[],dirty=false;
@@ -152,7 +153,7 @@ async function login(){
   toast('Welcome back, '+r.j.login+'!');
   reloadAll();
 }
-function logout(){localStorage.removeItem('lg_tok');sessionStorage.removeItem('lg_tok');location.reload()}
+function logout(){localStorage.removeItem('lg_tok');sessionStorage.removeItem('lg_tok');sessionStorage.removeItem('lg_auth');location.replace('./')}
 
 async function loadJson(){
   const r=await api('/repos/'+REPO+'/contents/'+JSON_PATH+'?ref='+BRANCH);
