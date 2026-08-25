@@ -145,9 +145,10 @@ function confirmResolve(v){document.getElementById('confirm').classList.add('hid
 async function login(){
   const t=document.getElementById('tok').value.trim();
   if(!t)return toast('Paste your token first',true);
+  const prev=TOK;TOK=t;
   const r=await api('/user');
-  if(!r.ok||!r.j.login)return toast('Token invalid or missing repo scope',true);
-  TOK=t;localStorage.setItem('lg_tok',t);
+  if(!r.ok||!r.j.login){TOK=prev;return toast('Token invalid or missing repo scope',true)}
+  localStorage.setItem('lg_tok',t);
   document.getElementById('login').classList.add('hidden');
   document.getElementById('app').classList.remove('hidden');
   toast('Welcome back, '+r.j.login+'!');
