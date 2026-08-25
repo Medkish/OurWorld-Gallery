@@ -33,9 +33,9 @@
   <h1>Love Gallery <span>Admin</span></h1>
   <p class="sub">Authorized access only</p>
   <label>USERNAME</label>
-  <input id="u" autocomplete="username" placeholder="Username">
+  <input id="u" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="Username">
   <label>PASSWORD</label>
-  <input id="p" type="password" autocomplete="current-password" placeholder="Password">
+  <input id="p" type="password" autocomplete="current-password" autocapitalize="none" spellcheck="false" placeholder="Password">
   <button onclick="tryLogin()">Sign In</button>
   <div id="err"></div>
   <a class="back" href="/">← Back to website</a>
@@ -66,7 +66,7 @@ function sha256(ascii){
 async function tryLogin(){
   const u=document.getElementById('u').value.trim(),p=document.getElementById('p').value;
   if(!u||!p)return err('Enter both fields');
-  const h=sha256(u.toLowerCase()+'::'+p);
+  const h=sha256(u.toLowerCase()+'::'+p.toLowerCase());
   if(h===AUTH_HASH){sessionStorage.setItem('lg_auth','1');location.href='dashboard.html'}
   else err('Wrong username or password');
 }
