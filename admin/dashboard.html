@@ -12,11 +12,15 @@
   body{background:var(--bg);color:var(--txt);min-height:100vh}
   a{color:var(--pink2)}
   .hidden{display:none!important}
-  header{display:flex;align-items:center;justify-content:space-between;padding:14px 28px;background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
+  header{display:flex;align-items:center;justify-content:space-between;padding:14px 28px;background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50;flex-wrap:wrap;gap:10px}
   header h1{font-size:20px;font-weight:600}
   header h1 span{color:var(--pink)}
   .hdr-actions{display:flex;gap:10px;align-items:center}
   main{max-width:1200px;margin:0 auto;padding:26px 20px 80px}
+  #connect{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--pink);border-radius:10px;padding:16px;margin-bottom:20px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  #connect input{flex:1;min-width:240px;background:var(--card2);border:1px solid var(--line);color:var(--txt);border-radius:9px;padding:10px 13px;font-size:13.5px}
+  #connect input:focus{outline:none;border-color:var(--pink)}
+  #connect .hint{width:100%;font-size:12px;color:var(--mut)}
   .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:26px}
   .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
   .card .num{font-size:30px;font-weight:700;color:var(--pink2)}
@@ -45,14 +49,6 @@
   #toast{position:fixed;top:74px;right:22px;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--ok);padding:12px 18px;border-radius:10px;font-size:13.5px;z-index:99;opacity:0;transform:translateY(-8px);transition:.25s;pointer-events:none;max-width:340px}
   #toast.show{opacity:1;transform:none}
   #toast.err{border-left-color:var(--bad)}
-  .login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
-  .login-box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:38px;width:100%;max-width:420px}
-  .login-box h1{font-size:22px;margin-bottom:6px}
-  .login-box p{color:var(--mut);font-size:13.5px;line-height:1.6;margin-bottom:22px}
-  .login-box input{width:100%;background:var(--card2);border:1px solid var(--line);color:var(--txt);border-radius:10px;padding:12px 14px;font-size:14px;margin-bottom:12px}
-  .login-box input:focus{outline:none;border-color:var(--pink)}
-  .login-box button{width:100%}
-  .hint{font-size:12px;color:var(--mut);margin-top:14px;line-height:1.6}
   .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.65);display:flex;align-items:center;justify-content:center;z-index:100;padding:20px}
   .modal{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px;max-width:380px;width:100%}
   .modal p{font-size:14px;line-height:1.6;margin-bottom:18px}
@@ -61,54 +57,49 @@
 </head>
 <body>
 
-<div id="login" class="login-wrap hidden">
-  <div class="login-box">
-    <h1>🔐 Admin Login</h1>
-    <p>Enter your GitHub Personal Access Token (with <b>repo</b> scope) to manage this gallery. It is stored <b>only in this browser</b> and never sent anywhere except GitHub.</p>
-    <input id="tok" type="password" placeholder="ghp_xxxxxxxxxxxx">
-    <button onclick="login()">Sign In</button>
-    <p class="hint">Create a token at <b>github.com/settings/tokens/new</b> → check <b>repo</b> → Generate.</p>
+<header>
+  <h1>💗 Love Gallery <span>Admin</span></h1>
+  <div class="hdr-actions">
+    <a class="btn ghost small" href="/" target="_blank">View Site ↗</a>
+    <button class="btn ghost small" onclick="disconnect()">Disconnect Token</button>
   </div>
+</header>
+
+<div id="connect" class="hidden">
+  <input id="tok" type="password" placeholder="Paste your GitHub token (ghp_…)" spellcheck="false" autocapitalize="none">
+  <button class="btn small" onclick="connectToken()">Connect</button>
+  <div class="hint">Needed once per device so the dashboard can edit your gallery. Get it at github.com/settings/tokens/new → check ✅ repo → Generate. Stored only in this browser.</div>
 </div>
 
-<div id="app" class="hidden">
-  <header>
-    <h1>💗 Love Gallery <span>Admin</span></h1>
-    <div class="hdr-actions">
-      <a class="btn ghost small" href="/" target="_blank">View Site ↗</a>
-      <button class="btn ghost small" onclick="logout()">Logout</button>
-    </div>
-  </header>
-  <main>
-    <div class="banner">⚠️ Changes go live after saving (GitHub rebuild takes ~1 minute). Uploaded/deleted images are committed to your repository automatically.</div>
-    <div class="cards">
-      <div class="card"><div class="num" id="st-total">–</div><div class="lbl">Photos in gallery</div></div>
-      <div class="card"><div class="num" id="st-files">–</div><div class="lbl">Files in folder</div></div>
-      <div class="card"><div class="num" id="st-orphan">–</div><div class="lbl">Not shown on site</div></div>
-      <div class="card"><div class="num" id="st-updated">–</div><div class="lbl">Gallery updated</div></div>
-    </div>
+<main id="main">
+  <div class="banner">⚠️ Changes go live after saving (GitHub rebuild takes ~1 minute). Uploaded/deleted images are committed to your repository automatically.</div>
+  <div class="cards">
+    <div class="card"><div class="num" id="st-total">–</div><div class="lbl">Photos in gallery</div></div>
+    <div class="card"><div class="num" id="st-files">–</div><div class="lbl">Files in folder</div></div>
+    <div class="card"><div class="num" id="st-orphan">–</div><div class="lbl">Not shown on site</div></div>
+    <div class="card"><div class="num" id="st-updated">–</div><div class="lbl">Gallery updated</div></div>
+  </div>
 
-    <h2>📤 Add Photos</h2>
-    <div class="toolbar">
-      <button class="btn small ghost" onclick="document.getElementById('file').click()">Choose files</button>
-      <input id="file" type="file" accept="image/*" multiple class="hidden">
-    </div>
-    <div id="drop">Drag &amp; drop photos here to upload</div>
+  <h2>📤 Add Photos</h2>
+  <div class="toolbar">
+    <button class="btn small ghost" onclick="document.getElementById('file').click()">Choose files</button>
+    <input id="file" type="file" accept="image/*" multiple class="hidden">
+  </div>
+  <div id="drop">Drag &amp; drop photos here to upload</div>
 
-    <h2>🖼️ Photos on Site</h2>
-    <div class="toolbar"><span style="align-self:center;color:var(--mut);font-size:13px">Rename titles or remove photos, then press Save Changes.</span></div>
-    <div class="grid" id="grid"></div>
+  <h2>🖼️ Photos on Site</h2>
+  <div class="toolbar"><span style="align-self:center;color:var(--mut);font-size:13px">Rename titles or remove photos, then press Save Changes.</span></div>
+  <div class="grid" id="grid"></div>
 
-    <h2>📦 Files not shown on site</h2>
-    <div id="orphans" style="color:var(--mut);font-size:13.5px"></div>
-  </main>
+  <h2>📦 Files not shown on site</h2>
+  <div id="orphans" style="color:var(--mut);font-size:13.5px"></div>
+</main>
 
-  <div id="statusbar" class="hidden">
-    <div><span class="dirty-dot"></span><span id="dirty-txt">Unsaved changes</span></div>
-    <div style="display:flex;gap:10px">
-      <button class="btn ghost small" onclick="reloadAll()">Discard</button>
-      <button class="btn small" id="savebtn" onclick="saveJson()">Save Changes</button>
-    </div>
+<div id="statusbar" class="hidden">
+  <div><span class="dirty-dot"></span><span id="dirty-txt">Unsaved changes</span></div>
+  <div style="display:flex;gap:10px">
+    <button class="btn ghost small" onclick="reloadAll()">Discard</button>
+    <button class="btn small" id="savebtn" onclick="saveJson()">Save Changes</button>
   </div>
 </div>
 
@@ -126,52 +117,62 @@
 
 <script>
 const REPO='Medkish/OurWorld-Gallery',BRANCH='master',JSON_PATH='assets/data/gallery.json',IMG_DIR='assets/img/gallery';
-let TOK=sessionStorage.getItem('lg_tok')||localStorage.getItem('lg_tok')||'';
-let pictures=[],jsonSha=null,dirFiles=[],dirty=false;
+let TOK=localStorage.getItem('lg_tok')||'',pictures=[],jsonSha=null,dirFiles=[],dirty=false,isConnected=false;
 
+function $(id){return document.getElementById(id)}
 function api(path,opt={}){
   opt.headers=Object.assign({'Authorization':'Bearer '+TOK,'Accept':'application/vnd.github+json'},opt.headers||{});
   return fetch('https://api.github.com'+path,opt).then(r=>r.json().then(j=>({ok:r.ok,status:r.status,j})));
 }
 function b64e(s){return btoa(unescape(encodeURIComponent(s)))}
 function b64d(s){return decodeURIComponent(escape(atob(s.replace(/\n/g,''))))}
-function toast(msg,err){const t=document.getElementById('toast');t.textContent=msg;t.className=err?'show err':'show';setTimeout(()=>t.className='',3200)}
-function setDirty(v){dirty=v;document.getElementById('statusbar').classList.toggle('hidden',!v)}
+function toast(msg,err){const t=$('toast');t.textContent=msg;t.className=err?'show err':'show';setTimeout(()=>t.className='',3200)}
+function setDirty(v){dirty=v;$('statusbar').classList.toggle('hidden',!v)}
 let confRes=null;
-function askConfirm(msg){return new Promise(res=>{confRes=res;document.getElementById('confirm-msg').textContent=msg;document.getElementById('confirm').classList.remove('hidden')})}
-function confirmResolve(v){document.getElementById('confirm').classList.add('hidden');confRes&&confRes(v)}
+function askConfirm(msg){return new Promise(res=>{confRes=res;$('confirm-msg').textContent=msg;$('confirm').classList.remove('hidden')})}
+function confirmResolve(v){$('confirm').classList.add('hidden');confRes&&confRes(v)}
 
-async function login(){
-  const t=document.getElementById('tok').value.trim();
-  if(!t)return toast('Paste your token first',true);
+async function connectToken(){
+  const t=$('tok').value.trim();
+  if(!t){toast('Paste your token first',true);return}
   const prev=TOK;TOK=t;
   const r=await api('/user');
-  if(!r.ok||!r.j.login){TOK=prev;return toast('Token invalid or missing repo scope',true)}
+  if(!r.ok||!r.j.login){TOK=prev;toast('Token invalid or missing repo scope',true);return}
   localStorage.setItem('lg_tok',t);
-  document.getElementById('login').classList.add('hidden');
-  document.getElementById('app').classList.remove('hidden');
-  toast('Welcome back, '+r.j.login+'!');
+  $('connect').classList.add('hidden');
+  toast('Connected as '+r.j.login+'!');
   reloadAll();
 }
-function logout(){localStorage.removeItem('lg_tok');sessionStorage.removeItem('lg_tok');location.replace('./')}
+function disconnect(){
+  if(!isConnected&&!TOK)return;
+  if(!confirm('Disconnect this browser from the gallery dashboard?'))return;
+  localStorage.removeItem('lg_tok');TOK='';isConnected=false;$('grid').innerHTML='';
+  $('main').classList.add('hidden');$('connect').classList.remove('hidden');toast('Disconnected');
+}
+async function boot(){
+  if(!TOK){$('main').classList.add('hidden');$('connect').classList.remove('hidden');return}
+  const r=await api('/user');
+  if(!r.ok){localStorage.removeItem('lg_tok');TOK='';$('main').classList.add('hidden');$('connect').classList.remove('hidden');return}
+  isConnected=true;$('connect').classList.add('hidden');await reloadAll();
+}
 
 async function loadJson(){
   const r=await api('/repos/'+REPO+'/contents/'+JSON_PATH+'?ref='+BRANCH);
   if(!r.ok)throw new Error('Cannot load gallery.json ('+r.status+')');
   jsonSha=r.j.sha;
   pictures=JSON.parse(b64d(r.j.content)).pictures||[];
-  document.getElementById('st-updated').textContent=new Date((await api('/repos/'+REPO+'/commits?path='+JSON_PATH+'&per_page=1')).j[0].commit.author.date).toLocaleDateString();
+  $('st-updated').textContent=new Date((await api('/repos/'+REPO+'/commits?path='+JSON_PATH+'&per_page=1')).j[0].commit.author.date).toLocaleDateString();
 }
 async function loadDir(){
   const r=await api('/repos/'+REPO+'/contents/'+IMG_DIR+'?ref='+BRANCH);
   dirFiles=(r.ok?r.j:[]).filter(f=>f.type==='file');
-  document.getElementById('st-files').textContent=dirFiles.length;
+  $('st-files').textContent=dirFiles.length;
 }
 function render(){
-  document.getElementById('st-total').textContent=pictures.length;
+  $('st-total').textContent=pictures.length;
   const listed=new Set(pictures.map(p=>p.image.split('/').pop()));
-  document.getElementById('st-orphan').textContent=dirFiles.filter(f=>!listed.has(f.name)).length;
-  document.getElementById('grid').innerHTML=pictures.map((p,i)=>{
+  $('st-orphan').textContent=dirFiles.filter(f=>!listed.has(f.name)).length;
+  $('grid').innerHTML=pictures.map((p,i)=>{
     const name=p.image.split('/').pop();
     const exists=dirFiles.some(f=>f.name===name);
     return `<div class="ph">
@@ -182,11 +183,10 @@ function render(){
         <div class="row"><span></span><button class="btn danger small" onclick="removePhoto(${i})">Delete</button></div>
       </div></div>`}).join('');
   const orphans=dirFiles.filter(f=>!listed.has(f.name));
-  document.getElementById('orphans').innerHTML=orphans.length
+  $('orphans').innerHTML=orphans.length
     ? 'These files exist in the repo but are not in the gallery: '+orphans.map(f=>`<span class="chip">${f.name}<button class="btn small" style="padding:2px 9px" onclick="addExisting('${f.path.replace(/'/g,"\\'")}','${f.name.replace(/'/g,"\\'")}')">＋ show on site</button></span>`).join('')
     : 'Everything is on the site 🎉';
 }
-function refreshStats(){render()}
 async function reloadAll(){setDirty(false);try{await Promise.all([loadJson(),loadDir()]);render()}catch(e){toast(e.message,true)}}
 
 function rename(i,v){if(pictures[i].title!==v){pictures[i].title=v;setDirty(true)}}
@@ -203,7 +203,7 @@ async function removePhoto(i){
 function slug(n){return n.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/[^\w.\-]+/g,'-').replace(/-+/g,'-').replace(/^[-.]+|[-.]+$/g,'')||('photo-'+Date.now())}
 async function uploadFiles(files){
   const imgs=[...files].filter(f=>f.type.startsWith('image/'));
-  if(!imgs.length)return toast('Only image files can be uploaded',true);
+  if(!imgs.length){toast('Only image files can be uploaded',true);return}
   for(const f of imgs){
     toast('Uploading '+f.name+'…');
     const name=slug(f.name.substring(0,f.name.lastIndexOf('.')))+f.name.slice(f.name.lastIndexOf('.')).toLowerCase();
@@ -221,7 +221,7 @@ async function addExisting(path,name){
   pictures.push({title:name.replace(/\.[^.]+$/,''),image:path});setDirty(true);render();saveJson();
 }
 async function saveJson(silent){
-  const btn=document.getElementById('savebtn');btn.textContent='Saving…';btn.disabled=true;
+  const btn=$('savebtn');btn.textContent='Saving…';btn.disabled=true;
   const cur=await api('/repos/'+REPO+'/contents/'+JSON_PATH+'?ref='+BRANCH);
   const put=await api('/repos/'+REPO+'/contents/'+JSON_PATH,{method:'PUT',body:JSON.stringify({message:'Update gallery via admin dashboard',content:b64e(JSON.stringify({pictures},null,2)),sha:(cur.ok?cur.j.sha:jsonSha),branch:BRANCH})});
   btn.textContent='Save Changes';btn.disabled=false;
@@ -231,21 +231,16 @@ async function saveJson(silent){
   if(!silent)toast('Saved! Site updates in ~1 min ⏱️');
 }
 
-const drop=document.getElementById('drop');
+const drop=$('drop');
 ['dragover','dragenter'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add('over')}));
 ['dragleave','drop'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove('over')}));
 drop.addEventListener('drop',e=>uploadFiles(e.dataTransfer.files));
-drop.addEventListener('click',()=>document.getElementById('file').click());
-document.getElementById('file').addEventListener('change',e=>{uploadFiles(e.target.files);e.target.value=''});
+drop.addEventListener('click',()=>$('file').click());
+$('file').addEventListener('change',e=>{uploadFiles(e.target.files);e.target.value=''});
+$('connect').addEventListener('submit',e=>e.preventDefault());
+$('tok').addEventListener('keydown',e=>{if(e.key==='Enter')connectToken()});
 
-if(TOK){
-  api('/user').then(r=>{
-    if(r.ok){document.getElementById('login').classList.add('hidden');document.getElementById('app').classList.remove('hidden');reloadAll()}
-    else{localStorage.removeItem('lg_tok');TOK='';document.getElementById('login').classList.remove('hidden')}
-  });
-}else{
-  document.getElementById('login').classList.remove('hidden');
-}
+boot();
 </script>
 </body>
 </html>
