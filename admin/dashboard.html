@@ -153,7 +153,7 @@ async function login(){
   toast('Welcome back, '+r.j.login+'!');
   reloadAll();
 }
-function logout(){localStorage.removeItem('lg_tok');sessionStorage.removeItem('lg_tok');sessionStorage.removeItem('lg_auth');location.replace('./')}
+function logout(){localStorage.removeItem('lg_tok');sessionStorage.removeItem('lg_tok');location.replace('./')}
 
 async function loadJson(){
   const r=await api('/repos/'+REPO+'/contents/'+JSON_PATH+'?ref='+BRANCH);
