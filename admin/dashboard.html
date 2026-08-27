@@ -125,7 +125,6 @@
 <div id="toast"></div>
 
 <script>
-if(sessionStorage.getItem('lg_auth')!=='1'){location.replace('./');throw new Error('auth')}
 const REPO='Medkish/OurWorld-Gallery',BRANCH='master',JSON_PATH='assets/data/gallery.json',IMG_DIR='assets/img/gallery';
 let TOK=sessionStorage.getItem('lg_tok')||localStorage.getItem('lg_tok')||'';
 let pictures=[],jsonSha=null,dirFiles=[],dirty=false;
